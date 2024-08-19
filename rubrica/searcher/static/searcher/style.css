@@ -1,0 +1,157 @@
+body{
+    margin: 0;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+.container{
+    min-width: 100%;
+    margin: 0 ;
+    padding: 0 ;
+    flex: 1;
+   /* background-color: #213E72;*/
+}
+
+.navbar{
+    padding: 5 px;
+    margin: 0;
+    background-color: #213E72 !important;
+}
+
+.navbar-brand{
+    color: white;
+    font-size: 28px;
+}
+
+.navbar-brand:hover{
+    text-decoration: none;
+    color: white;
+}
+
+a{
+    text-decoration: none;
+    color: white;
+}
+
+.dash{
+margin: 8px;    
+}
+
+.reg{
+    color: black;
+}
+
+a:hover{
+    color:white ;
+}
+
+.auth_link{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+li{
+    list-style-type:none;
+    padding: 5px;
+}
+
+.info{
+    color: #10439F;
+}
+
+.info:hover{
+    text-decoration: underline;
+    color: #10439F;
+}
+
+.checkbox, .search_part{
+    text-align: center;
+    display: flex;
+    flex-direction: row;
+    justify-content:center;
+    text-align: center;
+    margin-top: 20px;
+}
+
+
+.scelta_struttura{
+    padding-left: 25px;
+    font-size: 1.5em;
+}
+
+.scelta_utente{
+    font-size: 1.5em;
+}
+
+.searcher{
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content:center;
+    text-align: center;
+    margin-top: 35px;
+    
+}
+
+.search-input{
+    width: 340px;
+}
+
+.img-logo{
+    height: 58px;
+}
+
+.strutt, .nome, .strutture_figlie{
+    color: #0F67B1;
+}
+
+.strutt:hover{
+    color: #0F67B1;
+    text-decoration: underline;
+}
+
+/*.nome{
+    color: #0F67B1;
+}*/
+
+a.struttura_padre{
+    color: #667BC6;
+}
+
+a.struttura_padre:hover{
+text-decoration: underline;
+}
+
+
+.presentation, .blocco{
+    display: flex;
+    flex-direction: row;
+    text-align: center;
+
+    padding: 18px;
+    justify-content: space-around;
+}
+
+.informations{
+    display: flex;
+    flex-direction: column;
+    
+}
+
+.foto{
+    padding-top: 15px;
+}
+
+.blocco{
+    border: solid black .5px;
+    border-radius: 5px;
+    /* max-width: 500px; */
+    text-align: center;
+    max-height: 60px;
+    margin: 15px;
+}
+
+.modif{
+    text-decoration: underline;
+}

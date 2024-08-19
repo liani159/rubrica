@@ -1,0 +1,82 @@
+{% extends 'searcher/base.html' %}
+
+{% block content %}
+
+{% if query %}
+<!--{{query}}-->
+    <h2 class="text-center mt-3">Result(s)</h2>
+    <table class="table">
+        {% if dato == "searcher.utenti" %}
+        <h3 class="text-center nome">{{tatal_result}} Utenti trovati</h3>
+            <thead>
+            <tr>
+                <th scope="col">Nome</th>
+                <th scope="col">Cognome</th>
+                <th scope="col">Titolo</th>
+                <th scope="col">Telefono</th>
+                <th scope="col">Struttura</th>
+                <th>Data nascita</th>
+            </tr>
+            </thead>
+            <tbody>
+                {% for res in object_list %}
+                    
+                    <tr>
+                        <td><a href="{% url 'searcher:utente' res.object.nome res.object.cognome %}" class="strutt">{{res.object.nome}}</a></td>
+                        <td><a href="{% url 'searcher:utente' res.object.nome res.object.cognome %}" class="strutt">{{res.object.cognome}}</a></td>
+                        <td>{{res.object.titolo}}</td>
+                        <td>{{res.object.telefono}}</td>
+                        <td> <a href="{% url 'searcher:struttura' struttura_name=res.object.struttura %}" class="strutt">{{res.object.struttura}}</a></td>
+                        <td>{{res.object.data_nascita}}</td>
+                    </tr>
+                
+                {% endfor %}
+            </tbody>
+        
+        {% else %}
+        <h3 class="text-center nome">{{tatal_result}} Strutture trovate</h3>
+            <thead>
+                <tr>
+                    <th scope="col">Nome Struttura</th>
+                    <th scope="col">Indirizzo</th>
+                </tr>
+                </thead>
+                {% for res in object_list %}
+                <tbody>
+                <tr>
+                    <td><a href="{% url 'searcher:struttura' res.object.nome_struttura %}" class="strutt">{{res.object.nome_struttura}}</a></td>
+                    <td>{{res.object.indirizzo}}</td>
+                </tr>
+                </tbody>
+                {% endfor %}
+        {% endif %}
+    </table>
+    {% else %}
+    <h2 class="text-center mt-3">Makes your Searh Here</h2>
+    <form class="searcher" action="#"  role="search" method="GET">
+       {% csrf_token %}
+    <!-- {{form.as_p}}-->
+        <!--<div class="ricerca"> -->
+            <div class="search_part">
+                <div class="search-input"><input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="q"></div>
+                <div class="button-search"><button class="btn btn-secondary" type="submit">Search</button></div> 
+            </div>
+               
+            <div class="checkbox">
+                <div class="scelta_utente">
+                    <label for="Utenti">Utente</label>
+                    <input type="checkbox" name="check" onclick="onlyOne(this)" value="searcher.utenti" checked>
+                </div>
+            
+                <div class="scelta_struttura">
+                    <label for="Utenti">Struttura</label>
+                    <input type="checkbox" name="check" onclick="onlyOne(this)" value="searcher.struttura">
+                  </div>
+            </div>
+        <!--</div>-->
+
+        
+    </form>
+    
+{% endif %}
+{% endblock %}

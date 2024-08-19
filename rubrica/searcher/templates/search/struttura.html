@@ -1,0 +1,85 @@
+{% extends 'searcher/base.html' %}
+
+{% block content %}
+<h2 class="text-center mt-3">Result(s)</h2>
+<!--se cè una struttura padre mi stampa il suo nome al posto del nome della struttura corrente-->
+{% if struttura_padre %}
+  <h3 class="text-center nome">{{struttura_padre}}: {{numero_utenti}} Utenti trovati</h3></h3>
+  <h4 class="text-center"><a href="{% url 'searcher:struttura' name name %}" class="struttura_padre">Struttura Padre</a></h4>
+<table class="table">
+    <thead>
+        <tr>
+          <th scope="col">Nome</th>
+          <th scope="col">Cognome</th>
+          <th scope="col">Titolo</th>
+          <th scope="col">Telefono</th>
+          <th scope="col">Struttura</th>
+          <th>Data nascita</th>
+        </tr>
+      </thead>
+      {% for res in result %}
+      <tbody>
+        <tr>
+          <td><a href="{% url 'searcher:utente' res.object.nome res.object.cognome %}" class="strutt">{{res.object.nome}}</a></td>
+          <td><a href="{% url 'searcher:utente' res.object.nome res.object.cognome %}" class="strutt">{{res.object.cognome}}</a></td>
+          <td>{{res.object.titolo}}</td>
+          <td>{{res.object.telefono}}</td>
+          <td> <a href="{% url 'searcher:struttura' res.object.struttura %}" class="strutt">{{res.object.struttura}}</a></td>
+          <td>{{res.object.data_nascita}}</td>
+        </tr>
+    </tbody>
+    {% endfor %}
+</table>
+<hr>
+
+<h4 class="text-center strutture_figlie">Strutture Figli: {{numero_figli}} risultati trovati</h4>
+<table class="table">
+    <thead>
+        <tr>
+          <th scope="col">Nome</th>
+          <th scope="col">Indirizzo</th>
+        </tr>
+      </thead>
+      {% for res in sotto_strutture %}
+      <tbody>
+        <tr>
+          <td> <a href="{% url 'searcher:struttura' res.nome_struttura %}" class="strutt">{{res.object.nome_struttura}}</a></td>
+          <td>{{res.object.indirizzo}}</td>
+        </tr>
+    </tbody>
+    {% endfor %}
+</table>
+
+
+{% else %}
+  <h3 class="text-center nome">{{name}}:{{numero_utenti}} Utenti trovati</h3></h3>
+  <h4 class="text-center"><a href="{% url 'searcher:struttura' name name %}" class="struttura_padre">Struttura Padre</a></h4>
+<table class="table">
+    <thead>
+        <tr>
+          <th scope="col">Nome</th>
+          <th scope="col">Cognome</th>
+          <th scope="col">Titolo</th>
+          <th scope="col">Telefono</th>
+          <th scope="col">Struttura</th>
+          <th>Data nascita</th>
+        </tr>
+      </thead>
+      {% for res in result %}
+      <tbody>
+        <tr>
+          <td><a href="{% url 'searcher:utente' res.object.nome res.object.cognome %}" class="strutt">{{res.object.nome}}</a></td>
+          <td><a href="{% url 'searcher:utente' res.object.nome res.object.cognome %}" class="strutt">{{res.object.cognome}}</a></td>
+          <td>{{res.object.titolo}}</td>
+          <td>{{res.object.telefono}}</td>
+          <td> <a href="{% url 'searcher:struttura' res.object.struttura %}" class="strutt">{{res.object.struttura}}</a></td>
+          <td>{{res.object.data_nascita}}</td>
+        </tr>
+    </tbody>
+    {% endfor %}
+</table>
+
+{% endif %}
+
+
+{% endblock %}
