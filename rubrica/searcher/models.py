@@ -6,7 +6,8 @@ class Struttura(models.Model):
     # many to one: ForeignKeyField
     #many to many: ManyToManyField
     # aggiungere id
-    nome_struttura = models.CharField(max_length=200, primary_key=True)
+    #nome_struttura = models.CharField(max_length=200, primary_key=True)
+    nome_struttura = models.CharField(max_length=200)
     indirizzo = models.CharField(max_length=200)
     struttura_padre = models.CharField(max_length=200)
 

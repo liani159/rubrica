@@ -1,2 +1,1 @@
 {{object.nome_struttura}}
-{{object.struttura_padre}}

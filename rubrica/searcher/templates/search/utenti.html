@@ -4,32 +4,32 @@
 
 {% for res in object_list %}
     <div class="text-center head mt-3">
-        <h3 class="text-center">{{res.object.nome}} {{res.object.cognome}}</h4>
+        <h3 class="text-center">{{res.nome}} {{res.cognome}}</h4>
         <h4 class="text-center"><a href="#" class="struttura_padre">Titolo Utente</a></h4>
     </div>
 
     <div class="presentation">
         
             <div class=" text-center foto">
-                <p> "*Iamgine {{res.object.nome}} Qua*"</p>
+                <p> "*Iamgine {{res.nome}} Qua*"</p>
                 <p><a class="strutt" href="#">Modifica Foto</a></p>
             </div>
             <div class="informations">
                 <div class="ufficio">
-                    <p>{{res.object.struttura}}</p>
+                    <p>{{res.struttura}}</p>
                 </div>
                 <div class="indirizzo">
                     <p>indirizzo da indicizare qua</p>
                 </div>
                 <div class="email">
-                    <p>{{res.object.nome}}{{res.object.cognome}}@gmail.com</p>
+                    <p>{{res.nome}}{{res.cognome}}@gmail.com</p>
                 </div>
             </div>
         
     </div>
 
     <div class="blocco">
-        <div class="testo"><p><a href="{% url 'searcher:struttura' struttura_name=res.object.struttura %}" class="strutt">{{res.object.struttura}}</a></p></div>
+        <div class="testo"><p><a href="{% url 'searcher:struttura' struttura_name=res.struttura %}" class="strutt">{{res.struttura}}</a></p></div>
         <!-- <div class="modif"><p> <a href="#" class="strutt">Modifica dati</a></p></div> -->
         <!-- Button trigger modal -->
         <div class="text-center modif">

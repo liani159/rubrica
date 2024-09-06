@@ -89,7 +89,7 @@ DATABASES = {
 HAYSTACK_CONNECTIONS = {
     'default': {
         'ENGINE': 'haystack.backends.solr_backend.SolrEngine',
-        'URL': 'http://127.0.0.1:8983/solr/unife',                 # Assuming you created a core named 'tester' as described in installing search engines.
+        'URL': 'http://127.0.0.1:8983/solr/rubrica',                 # Assuming you created a core named 'tester' as described in installing search engines.
         'ADMIN_URL': 'http://127.0.0.1:8983/solr/admin/cores'
         # ...or for multicore...
         # 'URL': 'http://127.0.0.1:8983/solr/mysite',

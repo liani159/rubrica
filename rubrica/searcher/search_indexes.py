@@ -7,7 +7,7 @@ class UtentiIndex(indexes.SearchIndex, indexes.Indexable):
     #text = indexes.CharField(document=True, use_template=True)
     nome = indexes.NgramField(model_attr='nome')
     cognome = indexes.NgramField(model_attr='cognome')
-    struttura = indexes.NgramField(model_attr='struttura')
+    #struttura = indexes.NgramField(model_attr='struttura')
     #cod = indexes.CharField(model_attr='cod')
     
 
@@ -22,7 +22,7 @@ class UtentiIndex(indexes.SearchIndex, indexes.Indexable):
 class StrutturaIndex(indexes.SearchIndex, indexes.Indexable):
     text = indexes.NgramField(document=True, use_template=True)
     nome_struttura = indexes.NgramField(model_attr='nome_struttura')
-    struttura_padre = indexes.NgramField(model_attr='struttura_padre')
+    #struttura_padre = indexes.NgramField(model_attr='struttura_padre')
     
 
     def get_model(self):

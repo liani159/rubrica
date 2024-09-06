@@ -20,12 +20,12 @@
       {% for res in result %}
       <tbody>
         <tr>
-          <td><a href="{% url 'searcher:utente' res.object.nome res.object.cognome %}" class="strutt">{{res.object.nome}}</a></td>
-          <td><a href="{% url 'searcher:utente' res.object.nome res.object.cognome %}" class="strutt">{{res.object.cognome}}</a></td>
-          <td>{{res.object.titolo}}</td>
-          <td>{{res.object.telefono}}</td>
-          <td> <a href="{% url 'searcher:struttura' res.object.struttura %}" class="strutt">{{res.object.struttura}}</a></td>
-          <td>{{res.object.data_nascita}}</td>
+          <td><a href="{% url 'searcher:utente' res.nome res.cognome %}" class="strutt">{{res.nome}}</a></td>
+          <td><a href="{% url 'searcher:utente' res.nome res.cognome %}" class="strutt">{{res.cognome}}</a></td>
+          <td>{{res.titolo}}</td>
+          <td>{{res.telefono}}</td>
+          <td> <a href="{% url 'searcher:struttura' res.struttura %}" class="strutt">{{res.struttura}}</a></td>
+          <td>{{res.data_nascita}}</td>
         </tr>
     </tbody>
     {% endfor %}
@@ -43,8 +43,8 @@
       {% for res in sotto_strutture %}
       <tbody>
         <tr>
-          <td> <a href="{% url 'searcher:struttura' res.nome_struttura %}" class="strutt">{{res.object.nome_struttura}}</a></td>
-          <td>{{res.object.indirizzo}}</td>
+          <td> <a href="{% url 'searcher:struttura' res.nome_struttura %}" class="strutt">{{res.nome_struttura}}</a></td>
+          <td>{{res.indirizzo}}</td>
         </tr>
     </tbody>
     {% endfor %}
@@ -68,11 +68,11 @@
       {% for res in result %}
       <tbody>
         <tr>
-          <td><a href="{% url 'searcher:utente' res.object.nome res.object.cognome %}" class="strutt">{{res.object.nome}}</a></td>
-          <td><a href="{% url 'searcher:utente' res.object.nome res.object.cognome %}" class="strutt">{{res.object.cognome}}</a></td>
+          <td><a href="{% url 'searcher:utente' res.nome res.cognome %}" class="strutt">{{res.nome}}</a></td>
+          <td><a href="{% url 'searcher:utente' res.nome res.cognome %}" class="strutt">{{res..cognome}}</a></td>
           <td>{{res.object.titolo}}</td>
           <td>{{res.object.telefono}}</td>
-          <td> <a href="{% url 'searcher:struttura' res.object.struttura %}" class="strutt">{{res.object.struttura}}</a></td>
+          <td> <a href="{% url 'searcher:struttura' res.struttura %}" class="strutt">{{res.struttura}}</a></td>
           <td>{{res.object.data_nascita}}</td>
         </tr>
     </tbody>

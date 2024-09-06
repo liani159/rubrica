@@ -1,3 +1,2 @@
 {{object.nome}}
 {{object.cognome}}
-{{object.struttura}}
