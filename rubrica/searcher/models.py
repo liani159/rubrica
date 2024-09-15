@@ -9,7 +9,7 @@ class Struttura(models.Model):
     #nome_struttura = models.CharField(max_length=200, primary_key=True)
     nome_struttura = models.CharField(max_length=200)
     indirizzo = models.CharField(max_length=200)
-    struttura_padre = models.CharField(max_length=200)
+    struttura_padre = models.CharField(max_length=200, null=True)
 
     def __str__(self) -> str:
         return f"{self.nome_struttura}"

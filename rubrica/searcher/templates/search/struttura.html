@@ -5,7 +5,7 @@
 <!--se cè una struttura padre mi stampa il suo nome al posto del nome della struttura corrente-->
 {% if struttura_padre %}
   <h3 class="text-center nome">{{struttura_padre}}: {{numero_utenti}} Utenti trovati</h3></h3>
-  <h4 class="text-center"><a href="{% url 'searcher:struttura' name name %}" class="struttura_padre">Struttura Padre</a></h4>
+  <h4 class="text-center"><a href="{% url 'searcher:struttura' struttura_id struttura_id %}" class="struttura_padre">Struttura Padre</a></h4>
 <table class="table">
     <thead>
         <tr>
@@ -20,11 +20,11 @@
       {% for res in result %}
       <tbody>
         <tr>
-          <td><a href="{% url 'searcher:utente' res.nome res.cognome %}" class="strutt">{{res.nome}}</a></td>
-          <td><a href="{% url 'searcher:utente' res.nome res.cognome %}" class="strutt">{{res.cognome}}</a></td>
+          <td><a href="{% url 'searcher:utente' res.id %}" class="strutt">{{res.nome}}</a></td>
+          <td><a href="{% url 'searcher:utente' res.id %}" class="strutt">{{res.cognome}}</a></td>
           <td>{{res.titolo}}</td>
           <td>{{res.telefono}}</td>
-          <td> <a href="{% url 'searcher:struttura' res.struttura %}" class="strutt">{{res.struttura}}</a></td>
+          <td> <a href="{% url 'searcher:struttura' res.struttura_id %}" class="strutt">{{res.struttura}}</a></td>
           <td>{{res.data_nascita}}</td>
         </tr>
     </tbody>
@@ -43,7 +43,7 @@
       {% for res in sotto_strutture %}
       <tbody>
         <tr>
-          <td> <a href="{% url 'searcher:struttura' res.nome_struttura %}" class="strutt">{{res.nome_struttura}}</a></td>
+          <td> <a href="{% url 'searcher:struttura' res.id %}" class="strutt">{{res.nome_struttura}}</a></td>
           <td>{{res.indirizzo}}</td>
         </tr>
     </tbody>
@@ -53,7 +53,7 @@
 
 {% else %}
   <h3 class="text-center nome">{{name}}:{{numero_utenti}} Utenti trovati</h3></h3>
-  <h4 class="text-center"><a href="{% url 'searcher:struttura' name name %}" class="struttura_padre">Struttura Padre</a></h4>
+  <h4 class="text-center"><a href="{% url 'searcher:struttura' struttura_id struttura_id %}" class="struttura_padre">Struttura Padre</a></h4>
 <table class="table">
     <thead>
         <tr>
@@ -68,12 +68,12 @@
       {% for res in result %}
       <tbody>
         <tr>
-          <td><a href="{% url 'searcher:utente' res.nome res.cognome %}" class="strutt">{{res.nome}}</a></td>
-          <td><a href="{% url 'searcher:utente' res.nome res.cognome %}" class="strutt">{{res..cognome}}</a></td>
-          <td>{{res.object.titolo}}</td>
-          <td>{{res.object.telefono}}</td>
-          <td> <a href="{% url 'searcher:struttura' res.struttura %}" class="strutt">{{res.struttura}}</a></td>
-          <td>{{res.object.data_nascita}}</td>
+          <td><a href="{% url 'searcher:utente' res.id %}" class="strutt">{{res.nome}}</a></td>
+          <td><a href="{% url 'searcher:utente' res.id %}" class="strutt">{{res.cognome}}</a></td>
+          <td>{{res.titolo}}</td>
+          <td>{{res.telefono}}</td>
+          <td> <a href="{% url 'searcher:struttura' res.struttura_id %}" class="strutt">{{res.struttura}}</a></td>
+          <td>{{res.data_nascita}}</td>
         </tr>
     </tbody>
     {% endfor %}

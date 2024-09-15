@@ -22,11 +22,11 @@
                 {% for res in object_list %}
                     
                     <tr>
-                        <td><a href="{% url 'searcher:utente' res.object.nome res.object.cognome %}" class="strutt">{{res.object.nome}}</a></td>
-                        <td><a href="{% url 'searcher:utente' res.object.nome res.object.cognome %}" class="strutt">{{res.object.cognome}}</a></td>
+                        <td><a href="{% url 'searcher:utente' res.object.id %}" class="strutt">{{res.object.nome}}</a></td>
+                        <td><a href="{% url 'searcher:utente' res.object.id %}" class="strutt">{{res.object.cognome}}</a></td>
                         <td>{{res.object.titolo}}</td>
                         <td>{{res.object.telefono}}</td>
-                        <td> <a href="{% url 'searcher:struttura' struttura_name=res.object.struttura %}" class="strutt">{{res.object.struttura}}</a></td>
+                        <td> <a href="{% url 'searcher:struttura' struttura_id=res.object.struttura_id %}" class="strutt">{{res.object.struttura}} </a></td>
                         <td>{{res.object.data_nascita}}</td>
                     </tr>
                 
@@ -44,7 +44,7 @@
                 {% for res in object_list %}
                 <tbody>
                 <tr>
-                    <td><a href="{% url 'searcher:struttura' res.object.nome_struttura %}" class="strutt">{{res.object.nome_struttura}}</a></td>
+                    <td><a href="{% url 'searcher:struttura' res.object.id %}" class="strutt">{{res.object.nome_struttura}}</a></td>
                     <td>{{res.object.indirizzo}}</td>
                 </tr>
                 </tbody>

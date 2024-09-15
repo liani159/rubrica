@@ -5,7 +5,7 @@
 {% for res in object_list %}
     <div class="text-center head mt-3">
         <h3 class="text-center">{{res.nome}} {{res.cognome}}</h4>
-        <h4 class="text-center"><a href="#" class="struttura_padre">Titolo Utente</a></h4>
+        <h4 class="text-center"><a href="#" class="struttura_padre">{{res.titolo}}</a></h4>
     </div>
 
     <div class="presentation">
@@ -29,7 +29,7 @@
     </div>
 
     <div class="blocco">
-        <div class="testo"><p><a href="{% url 'searcher:struttura' struttura_name=res.struttura %}" class="strutt">{{res.struttura}}</a></p></div>
+        <div class="testo"><p><a href="{% url 'searcher:struttura' struttura_id=res.struttura_id %}" class="strutt">{{res.struttura}}</a></p></div>
         <!-- <div class="modif"><p> <a href="#" class="strutt">Modifica dati</a></p></div> -->
         <!-- Button trigger modal -->
         <div class="text-center modif">
