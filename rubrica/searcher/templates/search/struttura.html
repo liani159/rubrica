@@ -52,7 +52,7 @@
 
 
 {% else %}
-  <h3 class="text-center nome">{{name}}:{{numero_utenti}} Utenti trovati</h3></h3>
+  <h3 class="text-center nome">{{name}}:{{numero_utenti}} Utenti trovati</h3>
   <h4 class="text-center"><a href="{% url 'searcher:struttura' struttura_id struttura_id %}" class="struttura_padre">Struttura Padre</a></h4>
 <table class="table">
     <thead>
@@ -81,5 +81,25 @@
 
 {% endif %}
 
+<!-- Se la struttura attuale a dei figli stamparli -->
+{% if bimbi %}
+      <h4 class="text-center strutture_figlie">Strutture Figli: {{numero_figli}} risultati trovati</h4>
+      <table class="table">
+          <thead>
+              <tr>
+                <th scope="col">Nome</th>
+                <th scope="col">Indirizzo</th>
+              </tr>
+            </thead>
+            {% for bim in bimbi %}
+            <tbody>
+              <tr>
+                <td> <a href="{% url 'searcher:struttura' bim.id %}" class="strutt">{{bim.nome_struttura}}</a></td>
+                <td>{{bim.indirizzo}}</td>
+              </tr>
+            </tbody>
+            {% endfor %}
+      </table>
+{% endif %}
 
 {% endblock %}

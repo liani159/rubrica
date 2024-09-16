@@ -1,8 +1,12 @@
+from typing import Any
+from django.http import HttpRequest
 from django.shortcuts import render
 from haystack.generic_views import SearchView, SearchQuerySet
 from .models import Utenti, Struttura
 from django.views.generic import ListView
 from haystack.query import SQ
+from django.shortcuts import HttpResponseRedirect, HttpResponse
+#from django.http import HttpResponseRedirect, HttpResponse
 
 # Create your views here.
 class RicercaSearchview(SearchView):
@@ -64,7 +68,7 @@ class StrutturaView(ListView):
         
         #if self.kwargs["struttura_padre_id"]:
         print(f"just a test:{struttura_padre_id}")
-        queryset = SearchQuerySet()
+        #queryset = SearchQuerySet()
         #padre = queryset.models(Struttura).filter(nome_struttura__exact=struttura_name)
         #===========>new code
         padre = Struttura.objects.get(id=struttura_id)
@@ -101,6 +105,14 @@ class StrutturaView(ListView):
         print("elsee")
         result = Utenti.objects.filter(struttura_id=struttura_id)
         name = Struttura.objects.filter(id=struttura_id)
+
+        #========================== per stampare strutture figli se la
+        #struttura attuale a dei figli
+        figlio = Struttura.objects.get(id=struttura_id)
+        print(f"figlio: {figlio.nome_struttura} {figlio.id}")
+        bimbi = Struttura.objects.filter(struttura_padre=figlio.nome_struttura)
+        #==========================
+
         print(f"result else:{result[0]}")
         print(f"result else:{name[0]}")
         numero_utenti = result.count()
@@ -108,6 +120,7 @@ class StrutturaView(ListView):
         context['name'] = name[0]
         context['struttura_id'] = struttura_id
         context['numero_utenti'] = numero_utenti
+        context['bimbi'] = bimbi
 
         return context
 
@@ -117,7 +130,7 @@ class UtentiView(ListView):
     template_name= 'search/utenti.html'
 
     def get_queryset(self):
-        queryset = SearchQuerySet()
+        #queryset = SearchQuerySet()
         #queryset = super().get_queryset()
         id = self.kwargs["id"]
         #cognome = self.kwargs["cognome"]
@@ -132,3 +145,29 @@ class UtentiView(ListView):
         context = super().get_context_data(*args, **kwargs)
         # do something
         return context
+
+
+    def update_informations(self, request):
+        nome = request.GET.get("nome")
+        cognome = request.GET.get("cognome")
+        telefono = request.GET.get("telefono")
+        id = self.kwargs["id"]
+
+        utente = Utenti.objects.get(id=id)
+        print(f"Utente trovato: {utente}")
+        
+        utente.nome = nome
+        utente.cognome = cognome
+        utente.telefono = telefono
+        utente.save()
+        print(f"affiche:{nome} {cognome} {telefono} {id}")
+        return
+
+        #return HttpResponse(f"affiche: {nome} {cognome} {telefono}")
+    
+    def get(self, request: HttpRequest, *args: Any, **kwargs: Any) -> HttpResponse:
+        if request.GET.get("nome") is not None:
+            self.update_informations(request)
+            print("without")
+        
+        return super().get(request, *args, **kwargs)
