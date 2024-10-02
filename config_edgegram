@@ -1,10 +1,11 @@
-bin/solr config -c demo -p 8983 -action set-user-property -property update.autoCreateFields -value false
+Commando di avvio solr su windows:
+    bin/solr config -c demo -p 8983 -action set-user-property -property update.autoCreateFields -value false
 
 
 
 
 config for partial search:
-
+config 1:
 <fieldType name="text_general" class="solr.TextField" positionIncrementGap="100" multiValued="true">
     <analyzer type="index">
             <tokenizer class="solr.StandardTokenizerFactory"/>
@@ -27,7 +28,8 @@ config for partial search:
   
   
   ------------------------------------------OR----------------------------------------------
-  <fieldType name="text_general" class="solr.TextField" positionIncrementGap="100" multiValued="true">
+config 2:  
+<fieldType name="text_general" class="solr.TextField" positionIncrementGap="100" multiValued="true">
     <analyzer type="index">
             <tokenizer class="solr.NGramTokenizerFactory"/>
             <filter class="solr.StopFilterFactory" ignoreCase="true" words="stopwords.txt" />
@@ -49,6 +51,7 @@ config for partial search:
   
   
   --------------------Correct---------------------------
+config 3:
 <fieldType name="text_general" class="solr.TextField" positionIncrementGap="100" multiValued="true">
     <analyzer type="index">
       <tokenizer class="solr.StandardTokenizerFactory"/>
