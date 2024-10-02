@@ -1,0 +1,73 @@
+------------ WorkFlow Completo per la gestione del progetto ------------
+
+===== Inizializzazione dell'ambiente di lavoro(partendo da zero) =====
+
+	0)prima di tutto creare una directory dove si lavorera
+
+	1) installare pipenv per la gestione dell'ambiente virtuale di lavoro
+		-link: https://pipenv.pypa.io/en/latest/
+
+	2) si spostare nella directory nuovamente creata e creare il file .env dove settare le variabile di ambiente(=1).
+		link: https://pipenv.pypa.io/en/latest/configuration.html#configuration-with-environment-variables
+
+	3) fare la pipenv install dei diversi package necesarie al nostro lavoro(django, solr, mysqlclient, django-haystack, pysolr):=> questo creara automanticamente un ambiente virtuale col nome della directory in cui ci troviamo... e in poi avviare l'ambiente virtuale se non ancora fatto in automatico(vedere sito ufficiale
+
+	4) scrivere il nostro codice Html, css, con django(NB: si puo passare direttamente al punto 5 se si fa la clone dal repositiry git)
+
+	5) configurare/collegare la nostra app col backend(mysql nel nostro caso)
+
+	6) creare i dati e riempire il nostro database, e fare le migrations
+		- fare le migrations
+		- nel repository si trova un file col nome populate.py, avviare per popolare il nostro database
+
+
+#---------Step successivo uso di django-haystack che servira di interfacia con solr per l'indicizzazione---------#
+
+	7)Essendo nel terminale nella root, spostarsi nella directory dove è stato insatallato solr es:: solr-9.6.1
+
+
+	8) avviare solr con : ./bin/solr start
+
+	9) creare un nuovo core dove verra messo tutti i dati indicizzati: ./bin/solr 	create -c <nome_core>
+		-quello creara il nuovo core <nome_core> con la config di default.
+
+	10) andare nel file di config setting.py del progetto django e configurare django-haystack come dall'esempio sul sito(nel repository è gia configurato col nome di core rubrica):: https://django-haystack.readthedocs.io/en/master/tutorial.html#installation
+
+
+	11) Dopodiché, andare nella directory server/solr/<nome_core>/conf (partendo della directory attuale dove è stato avviato solr) 
+		- Là, apprire il file solrconfig.xml per fare qualche modifiche(visto che con django haysack si vuole lavorare con il file schema.xml e non managed-schema.xml) 
+		- in questo file verificare se c'è la ManagedIndexSchemaFactory (che specifica che
+		useremo il file managed-schema.xml) canceliamolo(se c'è) e aggiungiamo  <schemaFactory
+		class="ClassicIndexSchemaFactory"/>
+		- poi rinominiamo il file managed-schema.xml con shema.xml
+		- link utile 1: "https://solr.apache.org/guide/solr/latest/configuration-guide/schema-
+			factory.html#managedindexschemafactory"
+		-link utile 2: "https://stackoverflow.com/questions/30673095/using-schema-xml-instead-of-managed-schema-with-solr-5-1-x"
+
+	12) successivamente costruire l'indice con il comando: python manage.py rebuild_index. 
+		che ci dara il numero di models procesati e messi nel indice.
+		(controllare tutto sul sito admin di solr)
+		
+	13) andare nel file nuovamente creato nella directory server/solr/<nome_core>/conf
+		(probabilmente managed-schema.xml), cancellare il vecchio file schema.xml e rinominare
+		il nuovo file creato con lo stesso nome(managed-schema.xml--> to --> schema.xml)
+
+	14)Aprire questo file e configurarlo nel modo che riesca a gestire le N-gram filter
+		nel file sostituire la fieltype name="text_general" con uno delle config trovata nel
+		file config_edgegram, o semplicmente addattarlo per farlo funzionare corretamente
+		-link utile 1: "https://solr.apache.org/guide/7_3/field-type-definitions-and
+			-properties.html"
+		-link utile 2 : "https://solr.apache.org/guide/solr/latest/indexing-guide/
+			filters.html#edge-n-gram-filter"
+		-link utile 2 :
+			"https://stackoverflow.com/questions/24546919/convert-words-based-solr-search-
+				to-edge-n-gram"
+
+
+PS: durante la config puo capitare che django solr ci dia un errore, dovuto al modo in cui è restituita il risultato di una ricerca(il risultato viena datto come lista) pero non dovrebbe essere il caso.
+per sistermare questo,basta andare nel file solr_backend.py(trovata nella scheda lib dell'ambiente virtuale(.venv) e modificare:
+	- raw_result[DJANGO_ID] con raw_result[DJANGO_ID][0]
+	- app_label, model_name = raw_result[DJANGO_CT].split(".") con app_label, model_name = raw_result[DJANGO_CT][0].split(".")
+	-link utile(leggere la risposta di Dismine): https://github.com/django-haystack/django-haystack/issues/1182
+
+
